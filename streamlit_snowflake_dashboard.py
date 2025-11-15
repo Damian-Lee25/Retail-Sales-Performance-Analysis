@@ -1,10 +1,6 @@
 import streamlit as st
-from snowflake.snowpark.context import get_active_session
 import pandas as pd
 import plotly.express as px
-
-# --- Snowpark session 
-session = get_active_session()
 
 # --- Page setup 
 st.set_page_config(page_title="Retail Sales Dashboard", layout="wide")
