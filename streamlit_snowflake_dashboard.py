@@ -6,8 +6,6 @@ import plotly.express as px
 st.set_page_config(page_title="Retail Sales Dashboard", layout="wide")
 st.title("📊 Retail Sales Dashboard")
 
-# ---  Query data 
-df = session.table("SALES.PUBLIC.SOURCE").to_pandas()
 df['DATE'] = pd.to_datetime(df['DATE'])
 df['MONTH_NAME'] = df['DATE'].dt.strftime('%B')
 df['MONTH_NUM'] = df['DATE'].dt.month
