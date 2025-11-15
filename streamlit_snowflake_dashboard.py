@@ -6,7 +6,12 @@ import plotly.express as px
 st.set_page_config(page_title="Retail Sales Dashboard", layout="wide")
 st.title("📊 Retail Sales Dashboard")
 
-df = pd.read_csv('sales_cleaned.csv')
+@st.cache_data
+def load_data():
+    data = "sales_cleaned.csv"
+    return pd.read_csv(data)
+
+df = load_data()
 df.columns = df.columns.str.upper()
 df['DATE'] = pd.to_datetime(df['DATE'])
 df['MONTH_NAME'] = df['DATE'].dt.strftime('%B')
