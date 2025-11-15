@@ -7,6 +7,7 @@ st.set_page_config(page_title="Retail Sales Dashboard", layout="wide")
 st.title("📊 Retail Sales Dashboard")
 
 df = pd.read_csv('sales_cleaned.csv')
+df.columns = df.columns.str.upper()
 df['DATE'] = pd.to_datetime(df['DATE'])
 df['MONTH_NAME'] = df['DATE'].dt.strftime('%B')
 df['MONTH_NUM'] = df['DATE'].dt.month
