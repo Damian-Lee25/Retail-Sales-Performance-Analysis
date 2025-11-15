@@ -43,7 +43,7 @@ st.markdown("---")
 
 # --- Analysis Menu 
 option = st.sidebar.selectbox(
-    "Choose a Visual:",
+    "Chose a Visual:",
     ["1. Product Sales Performance", "2. Monthly Trends", "3. Regional Insights"]
 )
 
