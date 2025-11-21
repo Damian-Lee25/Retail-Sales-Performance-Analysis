@@ -126,6 +126,7 @@ if option == "1. Product Sales Performance":
             margin=dict(t=70, b=70)
         )
 
+        st.subheader("Product C is the top performing product")
         st.plotly_chart(fig, use_container_width=True)
         st.markdown("#### Detailed Table")
         st.dataframe(by_product)
@@ -150,6 +151,7 @@ elif option == "2. Monthly Trends":
             labels={'SALES': 'Sales', 'MONTH_NAME': 'Month'}
         )
 
+        st.subheader("Sales are down 69% overall")
         st.plotly_chart(fig, use_container_width=True)
         st.markdown("#### Monthly Totals")
         st.dataframe(monthly[['MONTH_NAME', 'SALES', 'MoM_Change_%']])
@@ -161,6 +163,8 @@ elif option == "2. Monthly Trends":
     except Exception as e:
         logging.exception("Error generating Monthly Trends chart")
         st.error(f"❌ Error generating Monthly Trends chart: {e}")
+             
+
 
 # --- Regional Insights
 elif option == "3. Regional Insights":
@@ -184,6 +188,7 @@ elif option == "3. Regional Insights":
             uniformtext_mode='hide'
         )
 
+        st.subheader("The Northern region leads in sales")
         st.plotly_chart(fig, use_container_width=True)
         st.markdown("#### Detailed Table")
         st.dataframe(regional)
@@ -196,5 +201,5 @@ elif option == "3. Regional Insights":
         st.error(f"❌ Error generating Regional Insights chart: {e}")
 
 st.markdown("---")
-st.caption("Dashboard built with Streamlit & Snowflake Snowpark")
+st.caption("Retail Sales Performance Analysis")
 
