@@ -169,32 +169,55 @@ elif option == "2. Monthly Trends":
 # --- Regional Insights
 elif option == "3. Regional Insights":
     try:
+        
+        df['MONTH'] = df['DATE'].dt.strftime('%Y-%m')
+
+        
+        regional_monthly = df.groupby(['MONTH', 'REGION'], as_index=False)['SALES'].sum()
         regional = df.groupby(['REGION', 'PRODUCT'], as_index=False)['SALES'].sum()
 
-        fig = px.bar(
-            regional,
-            x='REGION',
-            y='SALES',
-            color='PRODUCT',
-            text='SALES',
-            labels={'SALES': 'Total Sales', 'REGION': 'Region', 'PRODUCT': 'Product'},
-            title="🏙️ Product Sales by Region"
+        
+        fig = px.line(
+            regional_monthly,
+            x="MONTH",
+            y="SALES",
+            color="REGION",
+            markers=True,
+            title="🏙️ Regional Sales Over Time",
+            labels={"MONTH": "Month", "SALES": "Total Sales", "REGION": "Region"}
         )
 
+        
         fig.update_layout(
-            plot_bgcolor='white',
-            paper_bgcolor='white',
-            uniformtext_minsize=8,
-            uniformtext_mode='hide'
+            showlegend=True,
+            legend=dict(
+                title="Region",
+                orientation="h",         
+                yanchor="bottom",
+                y=1.02,
+                xanchor="center",
+                x=0.5,
+                font=dict(size=12, color="black")
+            ),
+            plot_bgcolor="white",
+            paper_bgcolor="white",
+            font=dict(color="black"),
+            title_font=dict(size=20)
         )
 
-        st.subheader("The Northern region leads in sales")
-        st.plotly_chart(fig, use_container_width=True)
-        st.markdown("#### Detailed Table")
-        st.dataframe(regional)
+        
+        fig.update_xaxes(tickfont=dict(size=12, color="black"))
+        fig.update_yaxes(tickfont=dict(size=12, color="black"))
 
+        st.subheader("Regional Sales Trends Over Time")
+        st.plotly_chart(fig, use_container_width=True)
+
+        st.markdown("#### Detailed Monthly Regional Sales")
+        st.dataframe(regional)
         st.markdown("Region Total Sales")
         st.dataframe(df.groupby('REGION',as_index=False)['SALES'].sum().sort_values(by='SALES',ascending=False))
+
+    
 
     except Exception as e:
         logging.exception("Error generating Regional Insights chart")
