@@ -11,7 +11,7 @@ logging.basicConfig(
 )
 
 # --- Page setup 
-st.set_page_config(page_title="Retail Sales Dashboard", layout="wide")
+st.set_page_config(page_title="Retail Sales Performance", layout="wide")
 st.title("📊 Retail Sales Dashboard")
 
 @st.cache_data
